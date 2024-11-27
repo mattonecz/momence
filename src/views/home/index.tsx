@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 export const Index = () => {
   const fetchData = async () => {
     const response = await fetch(
-      'https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt',
+      'https://nodejs-serverless-function-express-nine-wine.vercel.app/api/hello',
     );
     if (!response.ok) {
       throw new Error('Failed to fetch the file');
     }
-    return await response.text();
+    return await response.json();
   };
 
   const { isPending, error, data, isFetched } = useQuery({
