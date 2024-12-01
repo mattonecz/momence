@@ -1,6 +1,7 @@
 import { Currency } from '../views/home/home';
 import styled from 'styled-components';
 import { LoadingIcon } from './LoadingIcon';
+import { useDeepCompareMemo } from 'use-deep-compare';
 
 type CurrencyTableProps = {
   currencies?: Currency[];
@@ -24,6 +25,10 @@ const TableHeader = styled.th`
   text-align: left;
   font-size: 14px;
   background-color: white;
+  white-space: nowrap;
+  @media (max-width: 480px) {
+    padding: 8px;
+  }
 `;
 
 const TableRow = styled.tr`
@@ -38,6 +43,10 @@ const TableCell = styled.td`
   padding: 8px 15px;
   font-size: 14px;
   text-align: left;
+  white-space: nowrap;
+  @media (max-width: 480px) {
+    padding: 8px;
+  }
 `;
 
 const IconButton = styled.button`
@@ -49,8 +58,9 @@ const IconButton = styled.button`
 
 export const CurrencyTable = (props: CurrencyTableProps) => {
   const { currencies, selectCurrency, reload, isLoading } = props;
-  return (
-    currencies && (
+
+  const table = useDeepCompareMemo(
+    () => (
       <Table>
         <thead>
           <tr>
@@ -60,14 +70,14 @@ export const CurrencyTable = (props: CurrencyTableProps) => {
             <TableHeader>Code</TableHeader>
             <TableHeader>
               Rate
-              <IconButton onClick={() => reload()}>
+              <IconButton onClick={reload}>
                 <LoadingIcon isLoading={isLoading} title="Refresh rates" />
               </IconButton>
             </TableHeader>
           </tr>
         </thead>
         <tbody>
-          {currencies.map((currency, index) => (
+          {currencies?.map((currency, index) => (
             <TableRow key={index} onClick={() => selectCurrency(currency)}>
               <TableCell>{currency.country}</TableCell>
               <TableCell>{currency.currency}</TableCell>
@@ -78,6 +88,9 @@ export const CurrencyTable = (props: CurrencyTableProps) => {
           ))}
         </tbody>
       </Table>
-    )
+    ),
+    [currencies, isLoading],
   );
+
+  return table;
 };

@@ -11,7 +11,6 @@ export type Currency = {
   rate: number;
 };
 const HomeWrapper = styled.div`
-  padding: 24px;
   max-width: 600px;
 `;
 
@@ -39,17 +38,6 @@ export const Home = () => {
     [isSuccess, data],
   );
 
-  const CalculateRate = (amount: number): string | undefined => {
-    if (selectedCurrency)
-      return (
-        ((amount / selectedCurrency.rate) * selectedCurrency.amount).toFixed(
-          2,
-        ) +
-        ' ' +
-        selectedCurrency.code
-      );
-  };
-
   return (
     <>
       <HomeWrapper>
@@ -57,10 +45,7 @@ export const Home = () => {
           <LoadingIcon isLoading={true} height={200} />
         ) : (
           <>
-            <ExchangeRate
-              currency={selectedCurrency}
-              calculate={CalculateRate}
-            />
+            <ExchangeRate currency={selectedCurrency} />
             <CurrencyTable
               currencies={data}
               selectCurrency={selectCurrency}

@@ -4,7 +4,8 @@ import { Home } from './views/home';
 import styled from 'styled-components';
 
 const AppWrapper = styled.div`
-  justify-items: center;
+  justify-content: center;
+  display: flex;
 `;
 
 const App = () => {

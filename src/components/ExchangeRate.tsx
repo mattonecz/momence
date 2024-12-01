@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 type ExchangeRateProps = {
   currency?: Currency;
-  calculate: (amount: number) => string | undefined;
 };
 
 const MainDiv = styled.div`
@@ -43,9 +42,16 @@ const Result = styled.span`
 export const ExchangeRate = (props: ExchangeRateProps) => {
   const [value, setValue] = useState(100);
 
-  const { calculate } = props;
+  const { currency } = props;
 
-  const rate = calculate(value);
+  const calculateRate = (): string | undefined => {
+    if (currency)
+      return (
+        ((value / currency.rate) * currency.amount).toFixed(2) +
+        ' ' +
+        currency.code
+      );
+  };
 
   return (
     <MainDiv>
@@ -53,7 +59,7 @@ export const ExchangeRate = (props: ExchangeRateProps) => {
         value={value}
         onChange={(evt) => setValue(parseInt(evt.target.value))}
       />
-      <Result>Kč = {rate}</Result>
+      <Result>Kč = {calculateRate()}</Result>
     </MainDiv>
   );
 };
