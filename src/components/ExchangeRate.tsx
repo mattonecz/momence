@@ -53,12 +53,14 @@ export const ExchangeRate = (props: ExchangeRateProps) => {
       );
   };
 
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(evt.target.value);
+    if (value) setValue(value);
+  };
+
   return (
     <MainDiv>
-      <NumberInput
-        value={value}
-        onChange={(evt) => setValue(parseInt(evt.target.value))}
-      />
+      <NumberInput value={value} onChange={handleChange} />
       <Result>Kč = {calculateRate()}</Result>
     </MainDiv>
   );
