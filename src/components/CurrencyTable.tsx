@@ -17,6 +17,7 @@ const Table = styled.table`
   border-radius: 8px;
   border-spacing: 0;
   overflow: hidden;
+  margin-bottom: 8px;
 `;
 
 const TableHeader = styled.th`
@@ -27,7 +28,7 @@ const TableHeader = styled.th`
   background-color: white;
   white-space: nowrap;
   @media (max-width: 480px) {
-    padding: 8px;
+    padding: 8px 4px;
   }
 `;
 
@@ -45,7 +46,7 @@ const TableCell = styled.td`
   text-align: left;
   white-space: nowrap;
   @media (max-width: 480px) {
-    padding: 8px;
+    padding: 8px 4px;
   }
 `;
 
@@ -83,7 +84,7 @@ export const CurrencyTable = (props: CurrencyTableProps) => {
               <TableCell>{currency.currency}</TableCell>
               <TableCell>{currency.amount}</TableCell>
               <TableCell>{currency.code}</TableCell>
-              <TableCell>{currency.rate} Kč</TableCell>
+              <TableCell>{currency.rate.toFixed(2)} Kč</TableCell>
             </TableRow>
           ))}
         </tbody>
