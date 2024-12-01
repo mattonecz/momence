@@ -1,17 +1,21 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
-import { Index } from './views/home';
+import { Home } from './views/home';
+import styled from 'styled-components';
+
+const AppWrapper = styled.div`
+  justify-items: center;
+`;
 
 const App = () => {
   const queryClient = new QueryClient();
 
   return (
-    <div className="content">
-      <QueryClientProvider client={queryClient}>
-        <h1>Rsbuild with React</h1>
-        <Index />
-      </QueryClientProvider>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <AppWrapper>
+        <Home />
+      </AppWrapper>
+    </QueryClientProvider>
   );
 };
 
