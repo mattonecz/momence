@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CurrencyTable, ExchangeRate } from '../../components';
-import { LoadingIcon } from '../../components/LoadingIcon';
+import { CurrencyTable, ExchangeRate, LoadingIcon } from '../../components';
 
 export type Currency = {
   country: string;
@@ -17,7 +16,6 @@ const HomeWrapper = styled.div`
 `;
 
 export const Home = () => {
-  console.log('reder');
   const [selectedCurrency, selectCurrency] = useState<Currency>();
   const fetchData = async () => {
     const response = await fetch(
